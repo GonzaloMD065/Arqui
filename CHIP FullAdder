@@ -1,0 +1,40 @@
+CHIP FullAdder {
+    IN a, b, c;
+    OUT sum;
+    carry;
+Part:
+
+    Not(In=a, out=not a);
+    Not(In=b, out=not b);
+    Not(In=c, out=not c);
+
+    And(a=notc, b=nota, out=eq11);
+    And(a=eq11, b=b, out=eq1);
+
+    And(a=notc, b=a, out=eq21);
+    And(a=eq21, b=notb, out=eq2);
+
+    And(a=c, b=nota, out=31);
+    And(a=eq31, b=notb, out=eq3);
+
+    And(a=c, b=a, out=eq41);
+    And(a=eq41, b=b out eq4);
+
+    Or(a=eq1, b=eq2, out=sum1);
+       Or(a=sum1, b=eq3, out=sum2);
+        Or(a=sum2, b=eq4, out=sum3);
+
+    And(a=notc, b=a, out eq51);
+    And(a=eq51, b=b, out=eq5);
+
+    And(a=b, b=nota, out=eq61);
+    And(a=eq61, b=b, out=eq6);
+
+    And(a=c, b=a, out=eq71);
+    And(a=eq71, b=notb, out=eq7);
+
+    Or(a=eq5, b=eq6, out=c1);
+       Or(a=c1, b=eq7, out=c2);
+       Or(a=c2, b=eq4, out=c3);
+
+}
